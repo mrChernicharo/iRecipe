@@ -1,10 +1,13 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
 import { Ingredient } from '../shared/ingredient.model';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class ShoppingListService {
-  ingredientsChanged = new EventEmitter<Ingredient[]>();
+  // ingredientsChanged = new EventEmitter<Ingredient[]>();
+  ingredientsChanged = new Subject<Ingredient[]>();
+
 
   ingredients = [
     new Ingredient('tomatoes', 10),
@@ -20,27 +23,56 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
-    this.ingredientsChanged.emit(this.ingredients.slice())
+    // this.ingredientsChanged.emit(this.ingredients.slice())
+    this.ingredientsChanged.next(this.ingredients.slice())
+
   }
 
   addIngredients(ingredients: Ingredient[]) {
-    this.ingredients.forEach(item => {
-      const sameIngredient = ingredients.find(ingredient => ingredient.name === item.name);
+    console.log(this.ingredients)
 
-      if (sameIngredient) {
-        item.amount += sameIngredient.amount
-      }
-    })
-    ingredients.forEach(item => {
-      const differentIngredient = this.ingredients.find(ingredient => ingredient.name === item.name);
+    this.ingredients.push(...ingredients);
+    this.ingredientsChanged.next(this.ingredients.slice())
+    // this.ingredientsChanged.emit(this.ingredients.slice())
 
-      if(!differentIngredient) {
-        this.ingredients.push(item);
-      }
-    })
+    // console.log(ingredients);
+    // console.log(this.ingredients);
 
-    // this.ingredients.push(...ingredients);
+    // solução 2
 
-    this.ingredientsChanged.emit(this.ingredients.slice())
+    // const concatedIngredients = ingredients.concat(this.ingredients);
+    // const outputArr: Ingredient[] = [];
+
+    // concatedIngredients.forEach((ingredient: Ingredient, index: number) => {
+    //   let existing = outputArr.filter((item, index) => {
+    //     return item.name === ingredient.name;
+    //   })
+    //   if (existing.length) {
+    //     let existingIndex = outputArr.indexOf(existing[0])
+    //     outputArr[existingIndex].amount += ingredient.amount
+    //   } else {
+    //   outputArr.push(ingredient)
+    //   }
+    // })
+    // console.log(outputArr)
+    // this.ingredients = outputArr;
+
+    // solução 1
+    // this.ingredients.slice().forEach(item => {
+    //   const sameIngredient = ingredients.find(ingredient => ingredient.name === item.name);
+    //   if (sameIngredient) {
+    //     item.amount += sameIngredient.amount
+    //   }
+    // })
+    // ingredients.slice().forEach(item => {
+    //   const differentIngredient = this.ingredients.find(ingredient => ingredient.name === item.name);
+    //   if(!differentIngredient) {
+    //     this.ingredients.push(item);
+    //   }
+
+    // })
+
+
+
   }
 }
