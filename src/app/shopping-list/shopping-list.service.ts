@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 export class ShoppingListService {
   // ingredientsChanged = new EventEmitter<Ingredient[]>();
   ingredientsChanged = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>()
 
 
   ingredients = [
@@ -33,6 +34,15 @@ export class ShoppingListService {
 
     this.ingredients.push(...ingredients);
     this.ingredientsChanged.next(this.ingredients.slice())
+
+  }
+}
+
+
+
+
+
+
     // this.ingredientsChanged.emit(this.ingredients.slice())
 
     // console.log(ingredients);
@@ -71,8 +81,3 @@ export class ShoppingListService {
     //   }
 
     // })
-
-
-
-  }
-}
