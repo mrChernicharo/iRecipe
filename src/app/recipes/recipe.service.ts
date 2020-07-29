@@ -18,9 +18,8 @@ export class RecipeService {
         new Ingredient('meat', 2),
         new Ingredient('bread', 1),
         new Ingredient('tomatoes', 1),
-        new Ingredient('onions', 1),
         new Ingredient('cheese', 1),
-        new Ingredient('letuce', 0.5),
+        new Ingredient('letuce', 2),
       ]
     ),
     new Recipe(
@@ -41,6 +40,7 @@ export class RecipeService {
       'https://i.ytimg.com/vi/2qLwkT1F4Lc/maxresdefault.jpg',
       [
         new Ingredient('pasta', 1),
+        new Ingredient('tomatoes', 3),
         new Ingredient('cheese', 2),
         new Ingredient('ham', 1.5)
       ]
