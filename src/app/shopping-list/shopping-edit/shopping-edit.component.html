@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
+    <h3>{{ editMode ? 'Edit Ingredient' : 'Create a new Ingredient' }}</h3>
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <div class="row">
         <div class="col-sm-7 form-group">
