@@ -59,15 +59,25 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
-    this.recipesChanged.next(this.recipes.slice());
+    this.reloadRecipes();
   }
 
   updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
-    this.recipesChanged.next(this.recipes.slice());
+    this.reloadRecipes();
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    console.log('deleted')
+    this.reloadRecipes();
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.slService.addIngredients(ingredients)
+  }
+
+  reloadRecipes() {
+    this.recipesChanged.next(this.recipes.slice());
   }
 }
