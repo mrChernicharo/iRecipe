@@ -41,6 +41,7 @@ export class RecipeEditComponent implements OnInit {
     } else {
       this.recipeService.addRecipe(newRecipe);
     }
+    this.router.navigate(['/recipes'])
     // console.log(this.recipeForm)
   }
 
@@ -54,6 +55,10 @@ export class RecipeEditComponent implements OnInit {
       'name': new FormControl(null, Validators.required),
       'amount': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
     }))
+  }
+
+  onDeleteIngredient(index: number) {
+    (this.recipeForm.get('ingredients') as FormArray).removeAt(index);
   }
 
 
