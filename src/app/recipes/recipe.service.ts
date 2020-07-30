@@ -10,43 +10,44 @@ export class RecipeService {
   recipeSelected = new Subject<Recipe>();
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'burgão',
-      'maravilha d\'Hamburger',
-      'https://i.ytimg.com/vi/L6yX6Oxy_J8/maxresdefault.jpg',
-      [
-        new Ingredient('meat', 2),
-        new Ingredient('bread', 1),
-        new Ingredient('tomatoes', 1),
-        new Ingredient('cheese', 1),
-        new Ingredient('letuce', 2),
-      ]
-    ),
-    new Recipe(
-      'maionese da boa',
-      'mayo test delicioso prato',
-      'https://keyassets-p2.timeincuk.net/wp/prod/wp-content/uploads/sites/53/2017/12/Vegetable-stew-recipe.jpg',
-      [
-        new Ingredient('mayo', 2),
-        new Ingredient('tomatoes', 2),
-        new Ingredient('potatoes', 2.5),
-        new Ingredient('carrots', 2),
-        new Ingredient('onions', 1),
-      ]
-    ),
-    new Recipe(
-      'lasagna',
-      'lasanha bolonhesa clássica',
-      'https://i.ytimg.com/vi/2qLwkT1F4Lc/maxresdefault.jpg',
-      [
-        new Ingredient('pasta', 1),
-        new Ingredient('tomatoes', 3),
-        new Ingredient('cheese', 2),
-        new Ingredient('ham', 1.5)
-      ]
-    )
-  ];
+  private recipes: Recipe[] = [];
+  //   [
+  //   new Recipe(
+  //     'burgão',
+  //     'maravilha d\'Hamburger',
+  //     'https://i.ytimg.com/vi/L6yX6Oxy_J8/maxresdefault.jpg',
+  //     [
+  //       new Ingredient('meat', 2),
+  //       new Ingredient('bread', 1),
+  //       new Ingredient('tomatoes', 1),
+  //       new Ingredient('cheese', 1),
+  //       new Ingredient('letuce', 2),
+  //     ]
+  //   ),
+  //   new Recipe(
+  //     'maionese da boa',
+  //     'mayo test delicioso prato',
+  //     'https://keyassets-p2.timeincuk.net/wp/prod/wp-content/uploads/sites/53/2017/12/Vegetable-stew-recipe.jpg',
+  //     [
+  //       new Ingredient('mayo', 2),
+  //       new Ingredient('tomatoes', 2),
+  //       new Ingredient('potatoes', 2.5),
+  //       new Ingredient('carrots', 2),
+  //       new Ingredient('onions', 1),
+  //     ]
+  //   ),
+  //   new Recipe(
+  //     'lasagna',
+  //     'lasanha bolonhesa clássica',
+  //     'https://i.ytimg.com/vi/2qLwkT1F4Lc/maxresdefault.jpg',
+  //     [
+  //       new Ingredient('pasta', 1),
+  //       new Ingredient('tomatoes', 3),
+  //       new Ingredient('cheese', 2),
+  //       new Ingredient('ham', 1.5)
+  //     ]
+  //   )
+  // ];
   constructor(private slService: ShoppingListService) { }
 
   setRecipes(recipes: Recipe[]) {
@@ -54,7 +55,7 @@ export class RecipeService {
     this.reloadRecipes()
   }
 
-  getRecipes() {
+  getRecipes(): Recipe[] {
     return this.recipes.slice();
   }
 
