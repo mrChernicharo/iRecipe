@@ -3,7 +3,7 @@
     <h3>{{ editMode ? 'Edit Ingredient' : 'Create a new Ingredient' }}</h3>
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <div class="row">
-        <div class="col-sm-7 form-group">
+        <div class="col-sm-9 form-group">
           <label for="name">Name</label>
           <input
             type="text"
@@ -14,7 +14,7 @@
             required
             >
         </div>
-        <div class="col-sm-2 form-group">
+        <div class="col-sm-2 col-sm-offset-1 form-group">
           <label for="amount">Amount</label>
           <input
             type="number"
