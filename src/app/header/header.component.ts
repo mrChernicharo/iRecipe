@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { dataStorageService } from '../shared/data-storage.service';
+import { DataStorageService } from '../shared/data-storage.service';
 
 @Component({
 	selector: 'app-header',
@@ -9,14 +9,14 @@ import { dataStorageService } from '../shared/data-storage.service';
 export class HeaderComponent {
   collapsed = true;
 
-  constructor(private dataService: dataStorageService) {}
+  constructor(private dataService: DataStorageService) {}
 
   onSaveData() {
     this.dataService.storeRecipes();
   }
 
   onFetchData() {
-    this.dataService.fetchRecipes();
+    this.dataService.fetchRecipes().subscribe();
   }
 }
 
