@@ -20,7 +20,7 @@ export class AuthService {
   public user = new Subject<User>();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   signUp(email: string, password: string) {
