@@ -7,7 +7,7 @@ export class User {
   ) {}
 
   get token() { // getter. prop that runs code
-    if (!this._token || new Date() > this._tokenExpirationDate) {
+    if (!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
       return null;
     }
     return this._token;
