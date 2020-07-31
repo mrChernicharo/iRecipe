@@ -1,8 +1,16 @@
 <div class="row">
   <div class=" col-xs-12 col-md-6 col-md-offset-3">
-    <h2>{{ isLoginMode ? 'Login' : 'Sign Up' }}</h2>
-    <p>{{ isLoginMode ? 'Enter your account' : 'Create an account' }}</p>
-    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <div class="header">
+      <h2>{{ isLoginMode ? 'Login' : 'Sign Up' }}</h2>
+      <p>{{ isLoginMode ? 'Enter your account' : 'Create an account' }}</p>
+    </div>
+    <div class="alert alert-danger" *ngIf="error">
+      {{ error }}
+    </div>
+    <div *ngIf="isLoading" style="text-align: center;">
+      <app-loading></app-loading>
+    </div>
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
       <div class="form-group">
         <label for="email">Email</label>
         <input
