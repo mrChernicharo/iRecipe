@@ -34,10 +34,10 @@ export class ShoppingListService {
   }
 
   addIngredients(ingredients: Ingredient[]) {
-    console.log(this.ingredients)
-
     this.ingredients.push(...ingredients);
+    // this.ingredients = this.mergeIngredients(ingredients)
     this.ingredientsChanged.next(this.ingredients.slice())
+    console.log(this.ingredients)
   }
 
   updateIngredient(index: number, newIngr: Ingredient) {
@@ -46,10 +46,26 @@ export class ShoppingListService {
   }
 
   deleteIngredient(index: number) {
-    this.ingredients.splice(index, 1)
-    this.ingredientsChanged.next(this.ingredients.slice())
-
+    this.ingredients.splice(index, 1);
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
+
+  // mergeIngredients(ingredients: Ingredient[]) {
+  //   const names = [];
+  //   const finalIngredients = [];
+  //   const merged = this.ingredients.concat(ingredients);
+
+  //   for (let ingredient of merged) {
+  //     if (names.indexOf(ingredient.name)  !== -1) {
+  //       let index = names.indexOf(ingredient.name);
+  //       finalIngredients[index].amount += ingredient.amount
+  //     } else {
+  //       finalIngredients.push(ingredient)
+  //     }
+  //     names.push(ingredient.name);
+  //   }
+  //   return finalIngredients;
+  // }
 }
 
 
