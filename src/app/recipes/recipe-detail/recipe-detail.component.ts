@@ -31,6 +31,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onEditRecipe() {
+    console.log(`onEditRecipe triggered`);
     this.router.navigate(['edit'], { relativeTo: this.route })
   }
 

@@ -25,7 +25,7 @@ export class RecipeEditComponent implements OnInit {
       this.id = +params['id'];
       this.editMode = params['id'] !== undefined;
       this.initForm();
-      // console.log('editMode: ' + this.editMode)
+      console.log('editMode: ' + this.editMode)
     })
   }
 
@@ -41,12 +41,18 @@ export class RecipeEditComponent implements OnInit {
     } else {
       this.recipeService.addRecipe(newRecipe);
     }
-    this.router.navigate(['/recipes'])
+    this.editMode = false;
     // console.log(this.recipeForm)
+    console.log('editMode: ' + this.editMode);
+    console.log(`leaving Edit Mode`);
+    this.router.navigate(['/recipes'])
+
   }
 
   onCancel() {
     this.editMode = false;
+    console.log(`leaving Edit Mode`);
+    console.log('editMode: ' + this.editMode);
     this.router.navigate(['/recipes'])
   }
 
