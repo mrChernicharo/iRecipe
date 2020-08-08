@@ -15,7 +15,7 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
     case AuthActions.LOGIN:
       const user = new User(
         action.payload.email,
-        action.payload.password,
+        action.payload.id,
         action.payload.token,
         action.payload.expirationDate
       );
