@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
-import * as authActions from '../auth/store/auth.actions';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -22,7 +21,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private dataService: DataStorageService,
     private authService: AuthService,
-    private store: Store<fromApp.AppState>) {}
+    private store: Store<fromApp.AppState>
+    ) {}
 
   ngOnInit() {
     // this.authService.user.subscribe(user => {
