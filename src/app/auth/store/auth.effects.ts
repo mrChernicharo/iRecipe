@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { throwError, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../user.model';
 
 export interface AuthResponseData {
   kind: string;
@@ -19,7 +20,10 @@ export interface AuthResponseData {
 }
 
 const handleAuthentication = (email: string, localId: string, idToken: string, expiresIn: number) => {
-  const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
+  const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+  const user = new User(email, localId, idToken, expirationDate);
+  localStorage.setItem('userData', JSON.stringify(user));
+
   return new AuthActions.AuthenticateSuccess({
     email: email,
     id: localId,
@@ -109,10 +113,49 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
-  authSuccess = this.actions$.pipe(
+  authRedirect= this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATE_SUCCESS, AuthActions.LOGOUT),
     tap(() => {
-      this.router.navigate(['/'])
+      this.router.navigate(['/']);
+    })
+  );
+
+  @Effect()
+  autoLogin = this.actions$.pipe(
+    ofType(AuthActions.AUTO_LOGIN),
+    map(() => {
+        const userData: {
+          email: string;
+          id: string;
+          _token: string;
+          _tokenExpirationDate: string;
+        } = JSON.parse(localStorage.getItem('userData'));
+
+        if (!userData) {
+          return { type: 'DUMMY' };
+        }
+
+        const loadedUser = new User(userData.email, userData.id, userData._token, new Date (userData._tokenExpirationDate));
+
+        if (loadedUser.token) {
+
+          return new AuthActions.AuthenticateSuccess({
+            email: loadedUser.email,
+            id: loadedUser.id,
+            token: loadedUser.token,
+            expirationDate: new Date(userData._tokenExpirationDate)
+          });
+        }
+      return { type: 'DUMMY' };
+    })
+  )
+
+  @Effect({ dispatch: false})
+  authLogout = this.actions$.pipe(
+    ofType(AuthActions.LOGOUT),
+    tap(() => {
+      localStorage.removeItem('userData');
+      this.router.navigate(['/auth']);
     })
   );
 
