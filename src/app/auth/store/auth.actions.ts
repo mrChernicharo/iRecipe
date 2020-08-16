@@ -14,7 +14,7 @@ export class LoginStart implements Action {
   constructor(public payload: {
     email: string,
     password: string
-  }) {}
+  }) { }
 }
 
 export class SignupStart implements Action {
@@ -23,7 +23,7 @@ export class SignupStart implements Action {
   constructor(public payload: {
     email: string,
     password: string
-  }) {}
+  }) { }
 }
 
 export class AuthenticateSuccess implements Action {
@@ -33,14 +33,15 @@ export class AuthenticateSuccess implements Action {
     email: string,
     id: string,
     token: string,
-    expirationDate: Date
-  }) {}
+    expirationDate: Date,
+    redirect: boolean
+  }) { }
 }
 
 export class AuthenticateFail implements Action {
   readonly type = AUTHENTICATE_FAIL;
 
-  constructor(public payload: string) {}
+  constructor(public payload: string) { }
 }
 
 export class Logout implements Action {
@@ -57,10 +58,10 @@ export class AutoLogin implements Action {
 
 
 export type AuthActions =
-| LoginStart
-| SignupStart
-| AuthenticateSuccess
-| AuthenticateFail
-| Logout
-| ClearError
-| AutoLogin;
+  | LoginStart
+  | SignupStart
+  | AuthenticateSuccess
+  | AuthenticateFail
+  | Logout
+  | ClearError
+  | AutoLogin;
