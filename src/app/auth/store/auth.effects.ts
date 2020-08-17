@@ -22,7 +22,7 @@ export interface AuthResponseData {
 
 const handleAuthentication = (email: string, localId: string, idToken: string, expiresIn: number) => {
   const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-  const user = new User(email, localId, idToken, expirationDate);
+  const user = new User(email, localId, idToken, expirationDate, true);
   localStorage.setItem('userData', JSON.stringify(user));
 
   return new AuthActions.AuthenticateSuccess({
@@ -125,7 +125,7 @@ export class AuthEffects {
     ofType(AuthActions.AUTHENTICATE_SUCCESS),
     tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
       if (authSuccessAction.payload.redirect) {
-        this.router.navigate(['/']);
+        this.router.navigate(['']);
       }
     })
   );
@@ -149,7 +149,8 @@ export class AuthEffects {
         userData.email,
         userData.id,
         userData._token,
-        new Date(userData._tokenExpirationDate)
+        new Date(userData._tokenExpirationDate),
+        true
       );
 
       if (loadedUser.token) {

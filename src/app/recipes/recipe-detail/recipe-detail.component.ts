@@ -45,6 +45,7 @@ export class RecipeDetailComponent implements OnInit {
 
   addToShoppingList() {
     this.store.dispatch(new ShoppingListActions.AddIngredients(this.recipe.ingredients));
+    confirm(`${this.recipe.ingredients.map(item => ' ' + item.name.toLocaleUpperCase())} successfully added to shopping-list`)
   }
 
   onEditRecipe() {

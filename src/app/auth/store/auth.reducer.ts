@@ -1,5 +1,5 @@
 import { User } from '../user.model';
-import * as AuthActions  from './auth.actions';
+import * as AuthActions from './auth.actions';
 
 
 export interface State {
@@ -15,13 +15,14 @@ const initialState = {
 }
 
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {
-  switch(action.type) {
+  switch (action.type) {
     case AuthActions.AUTHENTICATE_SUCCESS:
       const user = new User(
         action.payload.email,
         action.payload.id,
         action.payload.token,
-        action.payload.expirationDate
+        action.payload.expirationDate,
+        action.payload.redirect
       );
       return {
         ...state,
@@ -58,6 +59,6 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
       }
 
     default:
-    return state;
+      return state;
   }
 }

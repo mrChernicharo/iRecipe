@@ -23,6 +23,8 @@ const initialState: State = {
   editedItemIndex: -1,
 };
 
+
+
 export function shoppingListReducer(
   state: State = initialState,
   action: ShoppingListActions.ShoppingListActions
@@ -38,9 +40,11 @@ export function shoppingListReducer(
 
     // add ingredients
     case ShoppingListActions.ADD_INGREDIENTS:
+      const mergedIngredients = mergeIngredients([...state.ingredients], [...action.payload])
+
       return {
         ...state,
-        ingredients: [...state.ingredients, ...action.payload]
+        ingredients: [...mergedIngredients]
       };
 
     // update
@@ -91,4 +95,29 @@ export function shoppingListReducer(
     default:
       return state;
   }
+}
+
+function mergeIngredients(ingr1: Ingredient[], ingr2: Ingredient[]): Ingredient[] {
+  let allIngredients = ingr2.concat(ingr1)
+  let names: string[] = []
+  let newArr: Ingredient[] = []
+
+  for (let ingr of allIngredients) {
+
+    if (names.indexOf(ingr.name) !== -1) {
+      let index = names.indexOf(ingr.name)
+      newArr[index].amount += ingr.amount
+
+    } else {
+      newArr.push(new Ingredient(ingr.name, ingr.amount))
+    }
+
+    names.push(ingr.name)
+  }
+  newArr.sort((a, b) => {
+    if (a.name < b.name) { return -1; }
+    if (a.name > b.name) { return 1; }
+    return 0;
+  })
+  return newArr.slice();
 }

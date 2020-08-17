@@ -1,0 +1,6 @@
+a {
+  transition: 0.3s;
+}
+a:hover {
+  background-color: rgb(232, 232, 232) !important;
+}
