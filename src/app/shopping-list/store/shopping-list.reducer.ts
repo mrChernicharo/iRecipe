@@ -19,7 +19,7 @@ const initialState: State = {
     new Ingredient('carrots', 4),
     new Ingredient('cucumbers', 3)
   ],
-  editedIngredient:  null,
+  editedIngredient: null,
   editedItemIndex: -1,
 };
 
