@@ -1,27 +1,34 @@
 # IRecipe
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
+Angular application covering the main features and techniques in Angular9.
 
-## Development server
+Create, Update, Delete and edit recipes, edit your Shopping List based on the recipes you feel like cooking today!
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## An Angular CRUD App
+This application demonstrates most of Angular's functionalities.
+Users can SignUp, Login, Create recipes, Store and Fetch them from the backend.
+Login System built through different techniques like Services and Observables and also with NgRx Reducers, Actions and Effects.
+Strorage and Authentication: Facilitated with with Firebase APIs integration.
 
-## Code scaffolding
+   * Property, Event and 2-way Binding
+   * Directives
+   * Services
+   * Dependency Injection
+   * Observables
+   * Routing
+   * Pipes
+   * Authentication
+   * Http
+   * Forms
+   * RxJs
+   * NgRx
+   * Deploy
+   * ServerSide Rendering
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+App available at
+### https://i-recipe-b5b67.web.app/
 
-## Build
+## Thanks
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+This project was developed through out Maximilian Schwarzmüller's Angular Course - The Complete Guide. Thank's Max and thank YOU for visiting.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
