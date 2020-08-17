@@ -1,13 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormGroup, FormControl, FormArray, Form, Validators } from '@angular/forms';
-import { RecipeService } from '../recipe.service';
-import { Recipe } from '../recipe.model';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
 import * as fromApp from '../../store/app.reducer';
-import * as authActions from '../../auth/store/auth.actions';
 import * as RecipesActions from '../../recipes/store/recipes.actions';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -27,7 +24,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private recipeService: RecipeService,
     private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
@@ -35,19 +31,11 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       this.id = +params['id'];
       this.editMode = params['id'] !== undefined;
       this.initForm();
-      // console.log('editMode: ' + this.editMode);
     })
   }
 
   onSubmit() {
-    // const newRecipe = new Recipe(
-    //   this.recipeForm.value['name'],
-    //   this.recipeForm.value['description'],
-    //   this.recipeForm.value['imagePath'],
-    //   this.recipeForm.value['ingredients']
-    // );
     if (this.editMode) {
-      // this.recipeService.updateRecipe(this.id, newRecipe);
       this.store.dispatch(
         new RecipesActions.UpdateRecipe({
           index: this.id,
@@ -55,10 +43,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
         })
       );
     } else {
-      // this.recipeService.addRecipe(newRecipe);
       this.store.dispatch(new RecipesActions.AddRecipe(this.recipeForm.value));
     }
-    // this.router.navigate(['/recipes'])
     this.onCancel();
   }
 
@@ -87,7 +73,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
 
     if (this.editMode) {
-      // const recipe = this.recipeService.getRecipeById(this.id);
       this.storeSub = this.store.select('recipes')
         .pipe(
           map(state => {
