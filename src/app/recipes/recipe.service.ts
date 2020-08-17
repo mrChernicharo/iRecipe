@@ -52,7 +52,7 @@ export class RecipeService {
   // ];
   constructor(
     private store: Store<fromApp.AppState>
-    ) { }
+  ) { }
 
   setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;

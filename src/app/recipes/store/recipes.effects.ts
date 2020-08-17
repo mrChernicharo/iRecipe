@@ -1,13 +1,11 @@
-import { Recipe } from '../recipe.model';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import * as RecipesActions from '../../recipes/store/recipes.actions';
 import { switchMap, map } from 'rxjs/operators';
 
-import { Store } from '@ngrx/store';
-import * as fromApp from '../../store/app.reducer';
-import { Injectable } from '@angular/core';
+import * as RecipesActions from '../../recipes/store/recipes.actions';
+import { Recipe } from '../recipe.model';
 
 @Injectable()
 export class RecipesEffects {
@@ -26,8 +24,8 @@ export class RecipesEffects {
         return {
           ...recipe,
           ingredients: recipe.ingredients ? recipe.ingredients : []
-        }
-      })
+        };
+      });
     }),
     map(recipes => {
       return new RecipesActions.SetRecipes(recipes);
